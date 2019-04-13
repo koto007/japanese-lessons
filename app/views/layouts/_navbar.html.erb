@@ -14,9 +14,13 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">A propos</a></li>
           <li><a href="#">Contact</a></li>
-          <li><%= link_to "S'inscrire", signup_path %></li>
-          <li><a href="#">Se conecter</a></li>
-          <li><a href="#">Utilisateur</a></li>
+            <% if logged_in? %>
+              <li><%= link_to 'Mon espace', user_path(current_user) %></li>
+              <li><%= link_to 'Déconnextion', logout_path, method: :delete %></li>
+            <% else %>  
+              <li><%= link_to "S'inscrire", signup_path %></li>
+              <li><%= link_to 'Se connecter', login_path %></li>
+            <% end %>
         </ul>
       </div>
     </div>
