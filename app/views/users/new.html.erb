@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-xs-offset-3 col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Inscription</div>
+      <div class="panel-body">
+        <%= form_for(@user) do |f| %>
+
+          <div class="form-group">
+            <%= f.label :name, "Nom d'utilisateur" %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :email, 'Address mail' %>
+            <%= f.text_field :email, class: 'form-control', type: 'email' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password, 'Mot de passe' %>
+            <%= f.password_field :password, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password_confirmation, 'Confirmation de mot de passe' %>
+            <%= f.password_field :password_confirmation, class: 'form-control' %>
+          </div>
+          <div class="text-right">
+            <%= f.submit "S'inscrire", class: 'btn btn-success' %>
+          </div>
+        <% end %>  
+      </div>
+    </div>
+  </div>
+</div>
