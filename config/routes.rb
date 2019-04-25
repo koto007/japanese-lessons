@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   root to: 'toppages#index'
@@ -9,6 +8,11 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   
   get 'signup', to: 'users#new'
+  
+  get 'reservation/valider', to: 'reservations#valider'
+  #get 'reservation/modifier', to: 'reservations#modifier'
+  get 'reservation/confirm', to: 'reservations#create'
+  
   resources :users, only: [:show, :new, :create]
-
+  resources :reservations
 end

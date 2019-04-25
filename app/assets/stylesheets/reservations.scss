@@ -1,0 +1,15 @@
+// Place all the styles related to the reservations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.table a {
+  display: block;
+  text-align: center;
+  
+}
+.table a:hover {
+  background-color: #F08080;
+  text-decoration: none;
+}
+body * th {
+  text-align: center;
+}

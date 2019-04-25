@@ -53,5 +53,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'kaminari'
-gem 'rails_admin', '~> 1.3'
-gem 'cancancan', '~> 2.0'
+
+gem 'pry-byebug', group: :development
