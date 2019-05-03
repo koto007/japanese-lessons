@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -12,10 +12,18 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">A propos</a></li>
-          <li><a hfre=#>Contact</a></li>
+              <li><%= link_to 'A propos', 'https://ea560388419f458c869f9c460fea25f4.vfs.cloud9.us-east-2.amazonaws.com/#about' %></li>
             <% if logged_in? %>
               <li><%= link_to 'Mon espace', user_path(current_user) %></li>
+            <% end %>      
+            <% if current_user.try(:admin?) %>
+              <li><%= link_to 'Boîte messages', inquiries_path %></li>
+              <li><%= link_to 'Réservations', reservations_check_path %></li>
+            <% end %>  
+              <li><%= link_to 'Réserver un cours', reservations_path %></li>
+              <li><%= link_to 'Contact', inquiry_path %></li>
+
+            <% if logged_in? %>              
               <li><%= link_to 'Déconnextion', logout_path, method: :delete %></li>
             <% else %>  
               <li><%= link_to "S'inscrire", signup_path %></li>
