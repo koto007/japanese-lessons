@@ -1,12 +1,139 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-<div class="user-profile">
-  <div class="text-center icon">
-    <img src="<gravatar_url(@user, size: 100)>" alt="" class="image-cercle">
-  </div>
+<h1 class="text-center">Mon espace</h1>
+<% require 'date' %>
+<% require 'active_support/all' %>
+<p></p>
+<div class="user-profile"></div>
+
   <div class="text-center name">
     <h2><%= @user.name %></h2>
   </div>
-  <p>Votre prochain cours sera à</p>
-  <%= @user.reservations %>
-</div>
+  <div class="panel-body">
+    <img class="media-object img-rounded img-responsive center-block" src="<%= gravatar_url(@user, { size: 100 }) %>" alt="">
+  </div>
+  <p class="text-center">Votre prochain cours sera à</p> 
+  
+  <% @reservations_dates.each do |reservations_date| %>
+  <% @index = reservations_date.strftime("%u").to_i %>
+   <h3 class="text-center"><%= reservations_date.strftime("%Hh%M- #{@weeks[@index - 1]} %d %m %Y") %><% @reservation = Reservation.find_by(reserved_at: reservations_date) %><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-petit btn-danger btn-xs' %>
+   </h3>
+  <% end %>
+  
+<% if params[:week] == '1' || params[:week] == nil  %>
+  <%= link_to "Semaine prochaine→" , user_path(week: 2), class: 'right' %>
+<% elsif params[:week] == '2' %>
+  <%= link_to "←Retourner à cette semaine" , user_path(week: 1)%>
+  <%= link_to "Semaine d'après→" , user_path(week: 3), class: 'right' %>
+<% elsif params[:week] == '3' %> 
+  <%= link_to "←Retourner" , user_path(week: 2)%> 
+  <% end %>
+  
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th class="active">#</th>
+      <%  (0..6).each do |number| %>
+        <%  @index = (@this_monday + number.day).strftime("%u").to_i %>
+        <th class="active"><%= (@this_monday + number.day).strftime("#{@weeks[@index - 1]} %d %m %Y") %></th>
+      <% end %>
+    </tr>  
+  </thead>
+  <tbody>
+    <% count = @reservations_dates.count %>
+    <tr> 
+      <th>10h00-11h00</th>
+        <% (0..6).each do |number| %>
+        <% count = @reservations_dates.count %>
+        <% #binding.pry %>
+        <% if [@reservations_dates[0..(count-1)]].find{ |v| v == @your_lesson + number.day } %>
+            <th><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+          <% else %>
+            <th><p>-</p></th>
+          <% end %>
+        <% end %>
+    </tr>
+    <tr>
+      <th class="success">11h15-12h15</th>
+      <% (0..6).each do |number| %>
+
+        <% if [@reservations_dates].find{ |reservations_date| @your_lesson + number.day + 75.minutes == reservations_date } %>
+            <th class="success"><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+          <% else %>
+            <th class="success"><p>-</p></th>
+          <% end %>
+        <% end %>
+
+    </tr>
+    <tr>
+      <th>12h30-13h30</th>
+      <% (0..6).each do |number| %>
+
+        <% if [@reservations_dates].find{ |reservations_date| @your_lesson + number.day + 75.minutes * 2 == reservations_date } %>
+            <th><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+          <% else %>
+            <th><p>-</p></th>
+          <% end %>
+        <% end %>
+
+    </tr>
+    <tr>
+      <th class="info">13h45-14h45</th>
+      <% (0..6).each do |number| %>
+
+        <% if [@reservations_dates].find{ |reservations_date| @your_lesson + number.day + 75.minutes * 3 == reservations_date } %>
+            <th class="info"><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+          <% else %>
+            <th class="info"><p>-</p></th>
+          <% end %>
+        <% end %>
+
+    </tr>
+    <tr>
+      <th>15h00-16h00</th>
+      <% (0..6).each do |number| %>
+
+        <% if [@reservations_dates].find{ |reservations_date| @your_lesson + number.day + 75.minutes * 4== reservations_date } %>
+            <th><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+          <% else %>
+            <th><p>-</p></th>
+          <% end %>
+        <% end %>
+
+    </tr> 
+    <tr>
+      <th class="warning">16h15-17h15</th>
+      <% (0..6).each do |number| %>
+
+        <% if [@reservations_dates].find{ |reservations_date| @your_lesson + number.day + 75.minutes * 5 == reservations_date } %>
+            <th class="warning"><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+          <% else %>
+            <th class="warning"><p>-</p></th>
+          <% end %>
+        <% end %>
+  
+    </tr>    
+    <tr>
+      <th>17h30-18h30</th>
+      <% (0..6).each do |number| %>
+
+        <% if [@reservations_dates].find{ |reservations_date| @your_lesson + number.day + 75.minutes * 6 == reservations_date } %>
+            <th><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+          <% else %>
+            <th><p>-</p></th>
+          <% end %>
+        <% end %>
+    
+    </tr>    
+    <tr>
+      <th class="danger">18h45-19h45</th>
+      <% (0..6).each do |number| %>
+
+        <% if [@reservations_dates].find{ |reservations_date| @your_lesson + number.day + 75.minutes * 7 == reservations_date } %>
+            <th class="danger"><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+          <% else %>
+            <th class="danger"><p>-</p></th>
+          <% end %>
+        <% end %>
+           
+    </tr>        
+  </tbody>
+</table>  

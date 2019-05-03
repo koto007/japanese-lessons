@@ -1,10 +1,11 @@
+<h1 class="text-center">S'inscrire</h1>
+<p class="text-center">新規登録</p>
 <div class="row">
   <div class="col-xs-offset-3 col-xs-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">Inscription</div>
+
       <div class="panel-body">
         <%= form_for(@user) do |f| %>
-
+          <%= render 'layouts/error_messages', model: f.object %>
           <div class="form-group">
             <%= f.label :name, "Nom d'utilisateur" %>
             <%= f.text_field :name, class: 'form-control' %>
@@ -22,10 +23,9 @@
             <%= f.password_field :password_confirmation, class: 'form-control' %>
           </div>
           
-            <%= f.submit "S'inscrire", class: 'btn btn-block btn-success' %>
+            <%= f.submit "S'inscrire", class: 'btn btn-block btn-default' %>
        
         <% end %>  
-      </div>
-    </div>
+
   </div>
 </div>
