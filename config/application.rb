@@ -1,5 +1,7 @@
 require_relative 'boot'
 
+Time_zone = 'Paris'
+
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
