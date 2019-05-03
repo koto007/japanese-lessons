@@ -26,8 +26,8 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(password)
       session[:user_id] = @user.id
       return true
-    else 
+    else
       return false
     end
-  end 
+  end
 end
