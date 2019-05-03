@@ -10,9 +10,12 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   
   get 'reservation/valider', to: 'reservations#valider'
-  #get 'reservation/modifier', to: 'reservations#modifier'
   get 'reservation/confirm', to: 'reservations#create'
-  
-  resources :users, only: [:show, :new, :create]
+  get 'reservations/check', to: 'reservations#show'
+  post 'reservations/check', to: 'reservations#show'
+
+  get 'inquiry', to: 'inquiries#new'
+  resources :users
   resources :reservations
+  resources :inquiries
 end
