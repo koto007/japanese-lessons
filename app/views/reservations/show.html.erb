@@ -1,2 +1,25 @@
-<h1>Reservations#show</h1>
+<h1 class="text-center">Toutes les reservations</h1>
 <p>Find me in app/views/reservations/show.html.erb</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>user.id</th>
+      <th>name</th>
+      <th>email</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.id %></td>
+        <td><%= reservation.user.id %></td>
+        <td><%= reservation.user.name %></td>
+        <td><%= reservation.user.email %></td>
+        <td><%= reservation.reserved_at %></td>
+      </tr>
+    <% end %>  
+    
+  </tbody>
+</table>
