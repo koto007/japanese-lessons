@@ -1,7 +1,8 @@
+<h1 class="text-center">Se connecter</h1>
+<p class="text-center">ログイン</p>
 <div class="row">
   <div class="col-xs-offset-3 col-xs-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">Connextion</div>
+
       <div class="panel-body">
         <%= form_for(:session, url: login_path) do |f| %>
           <div class="form-group">
@@ -14,9 +15,8 @@
             <%= f.password_field :password, class: 'form-control' %>
           </div>
 
-          <%= f.submit 'Se connecter', class: 'btn btn-block btn-primary' %>
+          <%= f.submit 'Se connecter', class: 'btn btn-block btn-default' %>
         <% end %>
-      </div>
-    </div>
+
   </div>
 </div>
