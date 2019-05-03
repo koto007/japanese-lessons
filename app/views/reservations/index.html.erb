@@ -1,34 +1,39 @@
-<h1>Reservations#index</h1>
-<p>Find me in app/views/reservations/index.html.erb</p>
+<h1 class="text-center">Réservations</h1>
+<p class="text-center">Choisissez votre disponibilité et la cliquez</p>
 <table class="table table-bordered">
+  
+<% if params[:week] == '1' || params[:week] == nil  %>
+  <%= link_to "Semaine prochaine→" , reservations_path(week: 2), class: 'right' %>
+<% elsif params[:week] == '2' %>
+  <%= link_to "←Retourner à cette semaine" , reservations_path(week: 1)%>
+  <%= link_to "Semaine d'après→" , reservations_path(week: 3), class: 'right' %>
+<% elsif params[:week] == '3' %> 
+  <%= link_to "←Retourner" , reservations_path(week: 2)%> 
+<% end %>
   <thead>
     <tr>
       <th class="active">#</th>
-        <%  (0..6).each do |number| %>
-          <%  @index = (@this_monday + number.day).strftime("%u").to_i%>
-          <th class="active"><%= (@this_monday + number.day).strftime("#{@weeks[@index - 1]} %-d %m %Y") %></th>
-
-        <% end %>
+      <%  (0..6).each do |number| %>
+        <%  @index = (@this_monday + number.day).strftime("%u").to_i %>
+        <th class="active"><%= (@this_monday + number.day).strftime("#{@weeks[@index - 1]} %d %m %Y") %></th>
+      <% end %>
     </tr>  
   </thead>
   <tbody>
-
     <tr>
-      
-      
       <th>10h00-11h00</th>
       <%  (0..6).each do |number| %>
-      <% if  ((@this_monday + number.day) <= @today) #|| available? %>
-        <th><%= '×' %></th>
-      <% else %>  
-        <th><%= link_to '◯', reservation_confirm_path(reserved_at: @next_lesson + number.day) %></th>
-      <% end %>
+        <% if (@this_monday + number.day) <= @today || Reservation.where(reserved_at: @next_lesson + number.day).exists? %>
+          <th><%= '×' %></th>
+        <% else %>  
+          <th><%= link_to '◯', reservation_confirm_path(reserved_at: @next_lesson + number.day) %></th>
+        <% end %>
       <% end %>
     </tr>
     <tr>
       <th class="success">11h15-12h15</th>
       <%  (0..6).each do |number| %>
-      <% if (@this_monday + number.day) <= @today %>
+      <% if (@this_monday + number.day) <= @today || Reservation.where(reserved_at: @next_lesson + number.day + 75.minutes * 1).exists? %>
         <th class="success"><%= '×' %></th>
       <% else %>  
         <th class="success"><%= link_to '◯', reservation_confirm_path(reserved_at: @next_lesson + number.day + 75.minutes) %></th>
@@ -40,7 +45,7 @@
         12h30-13h30
       </th>
       <%  (0..6).each do |number| %>
-      <% if (@this_monday + number.day) <= @today %>
+      <% if (@this_monday + number.day) <= @today || Reservation.where(reserved_at: @next_lesson + number.day + 75.minutes * 2).exists? %>
         <th><%= '×' %></th>
       <% else %>        
         <th><%= link_to '◯', reservation_confirm_path(reserved_at: @next_lesson + number.day + 75.minutes * 2) %></th>
@@ -52,7 +57,7 @@
         13h45-14h45
       </th>
       <%  (0..6).each do |number| %>
-      <% if (@this_monday + number.day) <= @today %>
+      <% if (@this_monday + number.day) <= @today || Reservation.where(reserved_at: @next_lesson + number.day + 75.minutes * 3).exists? %>
         <th class="info"><%= '×' %></th>
       <% else %>        
         <th class="info"><%= link_to '◯', reservation_confirm_path(reserved_at: @next_lesson + number.day + 75.minutes * 3) %></th>
@@ -64,7 +69,7 @@
         15h00-16h00
       </th>
       <%  (0..6).each do |number| %>
-      <% if (@this_monday + number.day) <= @today %>
+      <% if (@this_monday + number.day) <= @today || Reservation.where(reserved_at: @next_lesson + number.day + 75.minutes * 4).exists? %>
         <th><%= '×' %></th>
       <% else %>        
         <th class><%= link_to '◯', reservation_confirm_path(reserved_at: @next_lesson + number.day + 75.minutes * 4) %></th>
@@ -76,7 +81,7 @@
         16h15-17h15
       </th>
       <%  (0..6).each do |number| %>
-      <% if (@this_monday + number.day) <= @today %>
+      <% if (@this_monday + number.day) <= @today || Reservation.where(reserved_at: @next_lesson + number.day + 75.minutes * 5).exists? %>
         <th class="warning"><%= '×' %></th>
       <% else %>        
         <th class="warning"><%= link_to '◯', reservation_confirm_path(reserved_at: @next_lesson + number.day + 75.minutes * 5) %></th>
@@ -88,7 +93,7 @@
         17h30-18h30
       </th>
       <%  (0..6).each do |number| %>
-      <% if (@this_monday + number.day) <= @today %>
+      <% if (@this_monday + number.day) <= @today || Reservation.where(reserved_at: @next_lesson + number.day + 75.minutes * 6).exists? %>
         <th><%= '×' %></th>
       <% else %>        
         <th><%= link_to '◯', reservation_confirm_path(reserved_at: @next_lesson + number.day + 75.minutes * 6) %></th>
@@ -100,7 +105,7 @@
         18h45-19h45
       </th>
       <%  (0..6).each do |number| %>
-      <% if (@this_monday + number.day) <= @today %>
+      <% if (@this_monday + number.day) <= @today || Reservation.where(reserved_at: @next_lesson + number.day + 75.minutes * 7).exists? %>
         <th class="danger"><%= '×' %></th>
       <% else %>        
         <th class="danger"><%= link_to '◯', reservation_confirm_path(reserved_at: @next_lesson + number.day + 75.minutes * 7) %></th>

@@ -4,24 +4,31 @@ class ReservationsController < ApplicationController
   require 'active_support/all'
   
   def index
-    @today = Date.today
-    @now = Time.now
-    @this_monday = @today - (@today.wday - 1)
-    #@date_test = @this_monday.strftime("%-d %m %Y")
-    @next_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00)
-    @weeks = ["lun","mar","mer","jeu","ven","sam","dim"]
-    
-    #@index = (@this_monday + number.day).strftime("%u").to_i
+      @weeks = ["lun","mar","mer","jeu","ven","sam","dim"]
 
+      @today = Date.current
+      @this_monday = @today - (@today.wday - 1)
+      if (params[:week] == '1') || (params[:week] == nil)
+        @next_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00).in_time_zone("Paris")
+      
+      elsif params[:week] == '2'
+        @this_monday += 7.days
+        @next_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00).in_time_zone("Paris")
+      
+      else
+        @this_monday += 14.days
+        @next_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00).in_time_zone("Paris")
+    end
   end
 
   def show
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id])
+    @reservations = Reservation.all.order('reserved_at ASC')
   end
   
   def new
     @reservation = Resesrvation.new
-    @user = User.new
+    #@user = User.new
   end
 
   def create
@@ -29,9 +36,10 @@ class ReservationsController < ApplicationController
     #@your_lesson = params[:reserved_at]
     #@lesson = @your_lesson.strftime("%-H h %-M %-d %m %Y")
     #@index = (@your_lesson).strftime("%u").to_i
-    
-    @reserved_at = current_user.book(:reserved_at)
-    if @reserved_at.save 
+   
+    #@reservation = current_user.book(params[:reserved_at])
+    @reservation = current_user.reservations.build(reserved_at: params[:reserved_at])
+    if @reservation.save 
       flash[:success] = 'Votre cours a été réservé.'
       redirect_to current_user
     else
@@ -49,21 +57,21 @@ class ReservationsController < ApplicationController
     #else
       #render 'index'
     #end
-  
-
-  
-  def update
-  end
 
   def destroy
+    @reservation = Reservation.find(params[:id])
+    @reservation.destroy
+    flash[:success] = 'Votre réservation a été annulé.'
+    redirect_to root_url
   end
-  
-  def available?
-    Reservation.where(:user_id => @user.id, :reserved_at => @reservation.id).exists?
-  end
-  #private
   
 
+  #private
+  
+  #def reserved_at_params
+   # params.require(:reservation).permit(:reserved_at)
+    
+  #end
   #def correct_user 
     #@reserved_at = current_user.reservation.find_by(id: params[:id])
     #unless @resereved_at
