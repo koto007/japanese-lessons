@@ -8,6 +8,22 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+
+  def admin?
+    !! current_user.admin == true
+  end
   
+  def require_user_admin
+    unless admin?
+      redirect_to root_url
+    end
+  end
+#  def admin?
+#    unless admin == false
+#      return true
+#    else 
+#      return false
+#    end
+#  end
 
 end

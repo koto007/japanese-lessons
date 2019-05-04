@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       flash[:success] = 'Vous avez réussi à vous connecter.'
       redirect_to @user
     else 
-      flash.now[:danger] = "Vous n'avez pas réussi à vous vous connecter."
+      flash.now[:danger] = "Vous n'avez pas réussi à vous vous connecter, réessayez"
       render 'new'
     end
   end
