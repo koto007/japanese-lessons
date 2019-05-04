@@ -6,18 +6,21 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
                     uniqueness: { case_sensitive: false } 
+  validates :password, presence: true, length: { minimum: 6 }                  
   has_secure_password
-  
+
   def book(reserved_at)
     self.reservations.build(reserved_at: reserved_at)
   end
   
-  #def reservations
-  
+ # has_many :reservations do
+#  def this_day
+ #   where(:reserved_at => (Time.zone.now.beginning_of_day..Time.zone.now.end_of_day))
   #end
-  
-  #def unbook(reservation)
-    #@user = User.find(params[:id])
-    #reservation.destroy
-  #end
+
+#  def this_week
+ #   where(:reserved_at => (Time.zone.now.beginning_of_week..Time.zone.now))
+  #end   
+
+#end
 end
