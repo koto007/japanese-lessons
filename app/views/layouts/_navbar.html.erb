@@ -12,7 +12,6 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to 'A propos', 'https://ea560388419f458c869f9c460fea25f4.vfs.cloud9.us-east-2.amazonaws.com/#about' %></li>
             <% if logged_in? %>
               <li><%= link_to 'Mon espace', user_path(current_user) %></li>
             <% end %>      

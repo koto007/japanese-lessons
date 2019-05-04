@@ -1,0 +1,219 @@
+/* line 4, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/reservations.scss */
+.table a {
+  display: block;
+  text-align: center;
+}
+
+/* line 9, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/reservations.scss */
+.table a:hover {
+  background-color: #F08080;
+  text-decoration: none;
+}
+
+/* line 13, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/reservations.scss */
+body * th {
+  text-align: center;
+}
+
+/* line 17, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/reservations.scss */
+.right {
+  float: right;
+}
+@charset "UTF-8";
+/* TOP */
+/* line 6, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+.top-cover {
+  margin-top: 100px;
+  background: url(/images/cover.TEST.jpg) center center no-repeat;
+  background-size: cover;
+  height: 600px;
+}
+
+/* line 15, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+.explanations {
+  text-align: center;
+  margin-top: 100px;
+}
+
+/* line 19, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+.explanations h4 {
+  padding-bottom: 30px;
+}
+
+/* ABOUT */
+/* line 28, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+.photo {
+  float: left;
+  width: 200px;
+  height: 100%;
+  border-radius: 70%;
+  background-size: cover;
+  display: inline-block;
+}
+
+/* line 37, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+.title a {
+  text-decoration: none;
+  color: #1f1f2e;
+}
+
+/* line 41, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+.title a ::hover {
+  color: #1f1f2e;
+}
+
+/* line 44, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+.about-container .french .japanese {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  /* IE10用 */
+  display: flex;
+}
+
+/* QUESTIONS */
+/* line 67, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+.question {
+  margin-bottom: 70px;
+}
+
+/* line 70, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+i {
+  margin-right: 15px;
+}
+
+/* 共通部*/
+/* line 75, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+.red {
+  color: #F08080;
+}
+
+/* line 78, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+.title {
+  text-align: center;
+  margin: 80px 0;
+}
+
+/* line 82, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+.path {
+  text-align: center;
+  margin-top: 70px;
+}
+
+/* line 86, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+.path a {
+  padding: 0 .3em;
+  transition: all .3s;
+  text-decoration: none;
+  color: #F08080;
+  line-height: center;
+}
+
+/* line 94, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+.path a:hover {
+  color: #fff;
+  background-color: #F08080;
+}
+
+/* FOOTER */
+/* line 101, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+footer {
+  margin: 80px 0;
+}
+
+/*HEADER*/
+/* line 106, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+header {
+  margin-bottom: 70px;
+}
+
+/* line 109, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+header li {
+  position: relative;
+  display: inline-block;
+  transition: .3s;
+}
+
+/* line 115, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+header li::after {
+  position: absolute;
+  bottom: .3em;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 2.5px;
+  background-color: #F08080;
+  opacity: 0;
+  transition: .3s;
+}
+
+/* line 127, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+header li:hover::after {
+  bottom: 0;
+  opacity: 1;
+}
+
+@media screen and (max-width: 544px) {
+  /*0px以上で適用する内容*/
+  /* line 134, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+  .photo {
+    width: 100px;
+    margin: 0 auto;
+  }
+
+  /* line 139, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+  .parent-about-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* line 143, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+  .french {
+    order: 1;
+  }
+
+  /* line 147, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+  .photo {
+    order: 2;
+  }
+
+  /* line 150, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/toppages.scss */
+  .japanese {
+    order: 3;
+  }
+}
+/* line 4, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/users.scss */
+.btn-default {
+  background-color: #F08080;
+}
+
+/* line 7, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/users.scss */
+.center {
+  display: block;
+  text-align: center;
+}
+
+/* line 11, /home/ec2-user/environment/japanese-lessons/app/assets/stylesheets/users.scss */
+.btn-petit {
+  margin-left: 10px;
+  padding: 0 10px;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
+body {
+  font-family: 	'Courier New', 'Lucida Console';
+}
+
