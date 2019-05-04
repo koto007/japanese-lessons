@@ -1,8 +1,30 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:show, :create]
+  before_action :require_user_logged_in, only: [:show]
+  require 'date' 
+  require 'active_support/all'
   
   def show
     @user = User.find(params[:id])
+    #binding.pry
+    @weeks = ["lun","mar","mer","jeu","ven","sam","dim"]
+    
+    @reservations_dates = @user.reservations.order('reserved_at ASC').map(&:reserved_at)
+
+      @today = Date.current
+      @this_monday = @today - (@today.wday - 1)
+
+      
+    if (params[:week] == '1') || (params[:week] == nil)
+      @your_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00)
+      
+    elsif params[:week] == '2'
+      @this_monday += 7.days
+      @your_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00)
+      
+    else
+      @this_monday += 14.days
+      @your_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00)
+    end
   end
 
   def new
@@ -21,9 +43,15 @@ class UsersController < ApplicationController
     end
   end
   
+
+  
   private
   
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+  
+  def reserved_at_params
+    params.require(:reservation).permit(:reserved_at)
   end
 end
