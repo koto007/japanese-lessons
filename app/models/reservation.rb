@@ -14,7 +14,7 @@ class Reservation < ApplicationRecord
     end
   end
   
-  validate :reservation_quota, :on => :create 
+ # validate :reservation_quota, :on => :create 
 
 #  private 
  #   def reservation_quota

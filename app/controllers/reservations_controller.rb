@@ -51,13 +51,9 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    #@weeks = ["lun","mar","mer","jeu","ven","sam","dim"]
-    #@your_lesson = params[:reserved_at]
-    #@lesson = @your_lesson.strftime("%-H h %-M %-d %m %Y")
-    #@index = (@your_lesson).strftime("%u").to_i
-   
-    #@reservation = current_user.book(params[:reserved_at])
-    @reservation = current_user.reservations.build(reserved_at: params[:reserved_at])
+
+    @reservation = current_user.book(params[:reserved_at])
+    #@reservation = current_user.reservations.build(reserved_at: params[:reserved_at])
     if @reservation.save 
       flash[:success] = 'Votre cours a été réservé. Je vous enverrons un mail de confirmation sous 24 heures.'
       redirect_to current_user
@@ -66,16 +62,6 @@ class ReservationsController < ApplicationController
     end 
   end
   
-  #def valider
-    #binding.pry
-    #@reservation = current_user.reservations.find(params[:id])
-    #@reservation = current_user.reservations.where(reserved_at: params[:reserved_at])
-    #if @reservation.save
-      #flash[:success] = 'Votre cours a été réservé.'
-      #redirect_to @user
-    #else
-      #render 'index'
-    #end
 
   def destroy
     @reservation = Reservation.find(params[:id])
@@ -83,19 +69,5 @@ class ReservationsController < ApplicationController
     flash[:success] = 'Votre réservation a été annulé.'
     redirect_to root_url
   end
-  
 
-  private
-
-  
-  #def reserved_at_params
-   # params.require(:reservation).permit(:reserved_at)
-    
-  #end
-  #def correct_user 
-    #@reserved_at = current_user.reservation.find_by(id: params[:id])
-    #unless @resereved_at
-      #redirect_to root_url
-    #end
-  #end
 end
