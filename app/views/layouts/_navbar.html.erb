@@ -12,14 +12,15 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-            <% if logged_in? %>
-              <li><%= link_to 'Mon espace', user_path(current_user) %></li>
-            <% end %>      
+    
             <% if current_user.try(:admin?) %>
               <li><%= link_to 'Boîte messages', inquiries_path %></li>
               <li><%= link_to 'Réservations', reservations_check_path %></li>
             <% end %>  
               <li><%= link_to 'Réserver un cours', reservations_path %></li>
+            <% if logged_in? %>
+              <li><%= link_to 'Mon espace', user_path(current_user) %></li>
+            <% end %>                
               <li><%= link_to 'Contact', inquiry_path %></li>
 
             <% if logged_in? %>              
