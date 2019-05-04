@@ -18,7 +18,7 @@ class InquiriesController < ApplicationController
   def create
     @inquiry = Inquiry.new(inquiry_params)
     if @inquiry.save
-      flash[:success] = 'Votre mail a été envoyé ! Je vous répondrons au plus vite.'
+      flash[:success] = 'Votre mail a été envoyé ! Je vous répondrai au plus vite.'
       redirect_to root_url
     else 
       flash.now[:danger] = "Votre message n'a pas été envoyé, réessayez."

@@ -55,7 +55,7 @@ class ReservationsController < ApplicationController
     @reservation = current_user.book(params[:reserved_at])
     #@reservation = current_user.reservations.build(reserved_at: params[:reserved_at])
     if @reservation.save 
-      flash[:success] = 'Votre cours a été réservé. Je vous enverrons un mail de confirmation sous 24 heures.'
+      flash[:success] = 'Votre cours a été réservé. Je vous enverrai un mail de confirmation sous 24 heures.'
       redirect_to current_user
     else
       render 'index'
