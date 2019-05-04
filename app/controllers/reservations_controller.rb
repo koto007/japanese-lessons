@@ -5,9 +5,12 @@ class ReservationsController < ApplicationController
   
   def index
       @weeks = ["lun","mar","mer","jeu","ven","sam","dim"]
-
       @today = Date.current
       @this_monday = @today - (@today.wday - 1)
+      reservations = current_user.reservations.map(&:reserved_at)
+      reservations.each do |reservation|
+        @reservation = Time.new(reservation.year, reservation.month, reservation.day)
+      end 
       if (params[:week] == '1') || (params[:week] == nil)
         @next_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00).in_time_zone("Paris")
       
@@ -19,10 +22,26 @@ class ReservationsController < ApplicationController
         @this_monday += 14.days
         @next_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00).in_time_zone("Paris")
     end
+    
+   
+
   end
 
   def show
-    #@user = User.find(params[:id])
+      @weeks = ["lun","mar","mer","jeu","ven","sam","dim"]
+      @today = Date.current
+      @this_monday = @today - (@today.wday - 1)    
+      if (params[:week] == '1') || (params[:week] == nil)
+        @next_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00).in_time_zone("Paris")
+      
+      elsif params[:week] == '2'
+        @this_monday += 7.days
+        @next_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00).in_time_zone("Paris")
+      
+      else
+        @this_monday += 14.days
+        @next_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00).in_time_zone("Paris")
+      end
     @reservations = Reservation.all.order('reserved_at ASC')
   end
   
@@ -40,7 +59,7 @@ class ReservationsController < ApplicationController
     #@reservation = current_user.book(params[:reserved_at])
     @reservation = current_user.reservations.build(reserved_at: params[:reserved_at])
     if @reservation.save 
-      flash[:success] = 'Votre cours a été réservé.'
+      flash[:success] = 'Votre cours a été réservé. Je vous enverrons un mail de confirmation sous 24 heures.'
       redirect_to current_user
     else
       render 'index'
@@ -66,7 +85,8 @@ class ReservationsController < ApplicationController
   end
   
 
-  #private
+  private
+
   
   #def reserved_at_params
    # params.require(:reservation).permit(:reserved_at)
