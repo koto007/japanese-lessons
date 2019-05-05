@@ -14,17 +14,31 @@ class Reservation < ApplicationRecord
     end
   end
   
-  validate :reservation_quota, :on => :create 
+  validate :day_quota, :on => :create 
+  validate :week_quota, :on => :create 
+
 
   private 
-    def reservation_quota
-      #binding.pry
-       if user.reservations.where(:reserved_at => user.reservations.last.reserved_at.beginning_of_day..user.reservations.last.reserved_at.end_of_day).exists?
-       
-         errors.add(:base, "Vous avez déjà réserver un cours à ce jour-là.")
-      #elsif user.reservations.count > 2
-       #  errors.add(:base, "Vous pouvez réserver deux cours par semaine.")
-      end
-    end  
-  end
+    def day_quota
+      if self.user.reservations.count >= 1 && self.user.reservations.where(:reserved_at => self.reserved_at.beginning_of_day..self.reserved_at.end_of_day).exists?
+        errors.add(:reserved_at, "Vous pouvez réserver un cours par jour, vous avez déjà réservé un cours à ce jour-là.")
+      end    
+    end
 
+    def week_quota
+      if self.user.reservations.count >= 2 && self.user.reservations.where(:reserved_at => self.reserved_at.beginning_of_day..self.reserved_at.end_of_day + 7.days).exists?
+        errors.add(:base, "Vous pouvez réserver un cours par jour, vous avez déjà réservé deux cours à cette semaine.")
+      end         
+    end
+      #elsif self.user.reservations.count >= 2 && self.user.reservations.where(:reserved_at => self.reserved_at.beginning_of_day..self.reserved_at.end_of_day + 7.days).exists?
+       # errors.add(:base, "Vous avez déjà réservé deux cours à cette semaine.")
+      #end         
+      #if user.reservations 
+       # if user.reservations.count >= 1 && user.reservations.this_day.exists?
+        #   
+      #  elsif user.reservations.count >= 2 && user.reservations.this_week.exists?
+       #   errors.add(:base, "Vous pouvez réserver deux cours par semaine.")
+      #  end
+      #end
+    #end
+end

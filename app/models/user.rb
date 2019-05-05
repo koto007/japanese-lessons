@@ -13,15 +13,14 @@ class User < ApplicationRecord
     self.reservations.build(reserved_at: reserved_at)
   end
   
-  #has_many :reservations do
-   #binding.pry
-  #def this_day
-   # where(:reserved_at => self.reservations.last.reserved_at.beginning_of_day..self.seservations.last.reserved_at.end_of_day)
-  #end
+#has_many :reservations do
+ #  def this_day(reserved_at)
+  #  where(:reserved_at => self.last.reserved_at.beginning_of_day..self.last.reserved_at.end_of_day)
+   #end
 
-  #def this_week
-   # where(:reserved_at => (Time.zone.now.beginning_of_week..Time.zone.now))
+#  def this_week(reserved_at)
+ #   where(:reserved_at => self.last.reserved_at.beginning_of_day..self.last.reserved_at + 7.days.end_of_day)
   #end   
 
-end
+#end
 end

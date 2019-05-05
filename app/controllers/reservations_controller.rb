@@ -52,13 +52,34 @@ class ReservationsController < ApplicationController
 
   def create
 
-    @reservation = current_user.book(params[:reserved_at])
+  
     #@reservation = current_user.reservations.build(reserved_at: params[:reserved_at])
+    
+      @weeks = ["lun","mar","mer","jeu","ven","sam","dim"]
+      @today = Date.current
+      @this_monday = @today - (@today.wday - 1)
+      reservations = current_user.reservations.map(&:reserved_at)
+      reservations.each do |reservation|
+        @reservation = Time.new(reservation.year, reservation.month, reservation.day)
+      end 
+      if (params[:week] == '1') || (params[:week] == nil)
+        @next_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00).in_time_zone("Paris")
+      
+      elsif params[:week] == '2'
+        @this_monday += 7.days
+        @next_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00).in_time_zone("Paris")
+      
+      else
+        @this_monday += 14.days
+        @next_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00).in_time_zone("Paris")
+      end
+    @reservation = current_user.book(params[:reserved_at])
     if @reservation.save 
       flash[:success] = 'Votre cours a été réservé. Je vous enverrai un mail de confirmation sous 24 heures.'
       redirect_to current_user
     else
       render 'index'
+      flash[:danger] = 'Vous pouvez réserver un cours par jour, deux cours par semaine.'
     end 
   end
   
