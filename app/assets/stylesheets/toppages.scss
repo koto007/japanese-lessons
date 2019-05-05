@@ -26,11 +26,12 @@
 
 .photo {
   float: left;
-  width: 200px;
+  width: 180px;
   height: 100%;
   border-radius: 70%;
   background-size: cover;
   display: inline-block;
+  padding-top: 20px;
 }
 
 .title a {
@@ -41,15 +42,13 @@
   color: #1f1f2e;
 }
 .about-container .french .japanese {
-  display: -webkit-box;
-  display: -ms-flexbox;/* IE10用 */
-  display: flex;  
-}
-.french {
 
 }
-.japanese {
-
+.french-part {
+  margin-bottom: 40px;
+}
+.japanese-part {
+  margin-bottom: 40px;
 
 }
 .col-md-7 {
@@ -76,7 +75,7 @@ i {
 }
 .title {
   text-align :center;
-  margin: 80px 0;
+  margin: 50px 0 80px 0;
 }
 .path {
   text-align: center;
@@ -127,27 +126,12 @@ header li:hover::after {
   bottom: 0;
   opacity: 1;
 }
-@media screen and (max-width:544px){
-  /*0px以上で適用する内容*/
+@media screen and (max-width:767px){
 
-.photo {
-  width: 100px;
-  margin: 0 auto;
-}
+img.photo {
+  width: 120px;
+  height: 100%;
 
-.parent-about-container {
-  display: flex;
-  flex-direction: column;
-}
-.french {
-
-  order: 1;
-}
-.photo {
-  order: 2;
-}
-.japanese {
-  order: 3;
 }
 
 }
