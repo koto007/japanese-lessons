@@ -79,7 +79,7 @@ class ReservationsController < ApplicationController
       redirect_to current_user
     else
       render 'index'
-      flash[:danger] = 'Vous pouvez réserver un cours par jour, deux cours par semaine.'
+      #flash[:danger] = 'Vous pouvez réserver un cours par jour, deux cours par semaine.'
     end 
   end
   

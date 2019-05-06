@@ -1,14 +1,27 @@
 <h1 class="text-center">Réservations</h1>
 <p class="text-center">Choisissez un horaire et cliquez</p>
+<% if action_name == "create" && @reservation.errors.any?  %>
+  <div class="alert alert-warning">
+    <ul>
+      <% @reservation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <table class="table table-bordered">
+
   
 <% if params[:week] == '1' || params[:week] == nil  %>
   <%= link_to "Semaine prochaine→" , reservations_path(week: 2), class: 'right' %>
+
 <% elsif params[:week] == '2' %>
   <%= link_to "←Retourner à cette semaine" , reservations_path(week: 1)%>
   <%= link_to "Semaine d'après→" , reservations_path(week: 3), class: 'right' %>
+
 <% elsif params[:week] == '3' %> 
   <%= link_to "←Retourner" , reservations_path(week: 2)%> 
+
 <% end %>
   <thead>
     <tr>
