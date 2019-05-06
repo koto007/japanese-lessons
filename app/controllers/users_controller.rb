@@ -7,11 +7,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     #binding.pry
     @weeks = ["lun","mar","mer","jeu","ven","sam","dim"]
-    
-    @reservations_dates = @user.reservations.order('reserved_at ASC').map(&:reserved_at)
-
-      @today = Date.current
-      @this_monday = @today - (@today.wday - 1)
+    @today = Date.current
+    #binding.pry
+    @reservations_dates = @user.reservations.where("reserved_at >= ?", @today).order('reserved_at ASC').map(&:reserved_at)
+    @this_monday = @today - (@today.wday - 1)
 
       
     if (params[:week] == '1') || (params[:week] == nil)

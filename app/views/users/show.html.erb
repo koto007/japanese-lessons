@@ -10,11 +10,13 @@
   <div class="panel-body">
     <img class="media-object img-rounded img-responsive center-block" src="<%= gravatar_url(@user, { size: 100 }) %>" alt="">
   </div>
-  <% if  @reservations_dates.count == 1 %> 
-    <p class="text-center">Votre prochain cours sera à</p> 
-  <% elsif @reservations_dates.count >= 2 %> 
-    <p class="text-center">Vos prochains cours seront à</p> 
-  <% end %>
+<% #binding.pry %>
+<% if  @reservations_dates.count == 1 %>
+  <p class="text-center">Votre prochain cours sera à</p> 
+<% elsif @reservations_dates.count >= 2 %>
+  <p class="text-center">Vos prochains cours seront à</p> 
+<% end %>
+
   <% @reservations_dates.each do |reservations_date| %>
     <% @index = reservations_date.strftime("%u").to_i %>
      <h3 class="text-center"><%= reservations_date.strftime("%Hh%M- #{@weeks[@index - 1]} %d %m %Y") %><% @reservation = Reservation.find_by(reserved_at: reservations_date) %><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-petit btn-danger btn-xs' %></h3>
