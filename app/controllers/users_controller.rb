@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:show]
+  before_action :correct_user, only: [:show]
   require 'date' 
   require 'active_support/all'
   
   def show
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id])
     #binding.pry
     @weeks = ["lun","mar","mer","jeu","ven","sam","dim"]
     @today = Date.current
@@ -53,4 +54,11 @@ class UsersController < ApplicationController
   def reserved_at_params
     params.require(:reservation).permit(:reserved_at)
   end
+  
+  def correct_user
+    @user = User.find(params[:id])
+     unless @user == current_user
+       redirect_to root_url
+      end
+    end
 end

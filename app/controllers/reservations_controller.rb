@@ -89,7 +89,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
     @reservation.destroy
     flash[:success] = 'Votre réservation a été annulé.'
-    redirect_to root_url
+    redirect_back(fallback_location: root_path)
   end
 
 end
