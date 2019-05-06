@@ -20,7 +20,6 @@
         <td><%= reservation.reserved_at %></td>
       </tr>
     <% end %>  
-    
   </tbody>
 </table>
 
@@ -44,12 +43,12 @@
     </tr>  
   </thead>
   <tbody>
-    <% count = @reservations.count %>
+   
     <tr> 
       <th>10h00-11h00</th>
         <% (0..6).each do |number| %>
-        <% if @reservations[0..(count-1)].find{ |v| v == @next_lesson + number.day } %>
-            <th><%= @user.name %></th>
+        <% if @reservations_dates.find{ |v| v == @next_lesson + number.day } %>
+            <th><p>pris</p></th>
           <% else %>
             <th><p>-</p></th>
           <% end %>
@@ -59,8 +58,8 @@
       <th class="success">11h15-12h15</th>
       <% (0..6).each do |number| %>
 
-        <% if @reservations[0..(count-1)].find{ |v| v == @next_lesson + number.day + 75.minutes } %>            
-        <th class="success"><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+        <% if @reservations_dates.find{ |v| v == @next_lesson + number.day + 75.minutes } %>            
+        <th class="success"><p>pris</p></th>
           <% else %>
             <th class="success"><p>-</p></th>
           <% end %>
@@ -71,8 +70,8 @@
       <th>12h30-13h30</th>
       <% (0..6).each do |number| %>
 
-        <% if @reservations[0..(count-1)].find{ |v| v == @next_lesson + number.day + 75.minutes * 2 } %>            
-            <th><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+        <% if @reservations_dates.find{ |v| v == @next_lesson + number.day + 75.minutes * 2 } %>            
+            <th><p>pris</p></th>
           <% else %>
             <th><p>-</p></th>
           <% end %>
@@ -83,8 +82,8 @@
       <th class="info">13h45-14h45</th>
       <% (0..6).each do |number| %>
 
-        <% if @reservations[0..(count-1)].find{ |v| v == @next_lesson + number.day + 75.minutes * 3 } %>            
-            <th class="info"><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+        <% if @reservations_dates.find{ |v| v == @next_lesson + number.day + 75.minutes * 3 } %>            
+            <th class="info"><p>pris</p></th>
           <% else %>
             <th class="info"><p>-</p></th>
           <% end %>
@@ -95,8 +94,8 @@
       <th>15h00-16h00</th>
       <% (0..6).each do |number| %>
 
-        <% if @reservations[0..(count-1)].find{ |v| v == @next_lesson + number.day + 75.minutes * 4 } %>            
-            <th><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+        <% if @reservations_dates.find{ |v| v == @next_lesson + number.day + 75.minutes * 4 } %>            
+            <th><p>pris</p></th>
           <% else %>
             <th><p>-</p></th>
           <% end %>
@@ -107,8 +106,8 @@
       <th class="warning">16h15-17h15</th>
       <% (0..6).each do |number| %>
 
-        <% if @reservations[0..(count-1)].find{ |v| v == @next_lesson + number.day + 75.minutes * 5 } %>            
-            <th class="warning"><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+        <% if @reservations_dates.find{ |v| v == @next_lesson + number.day + 75.minutes * 5 } %>            
+            <th class="warning"><p>pris</p></th>
           <% else %>
             <th class="warning"><p>-</p></th>
           <% end %>
@@ -119,8 +118,8 @@
       <th>17h30-18h30</th>
       <% (0..6).each do |number| %>
 
-        <% if @reservations[0..(count-1)].find{ |v| v == @next_lesson + number.day + 75.minutes * 6 } %>            
-            <th><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+        <% if @reservations_dates.find{ |v| v == @next_lesson + number.day + 75.minutes * 6 } %>            
+            <th><p>pris</p></th>
           <% else %>
             <th><p>-</p></th>
           <% end %>
@@ -131,8 +130,8 @@
       <th class="danger">18h45-19h45</th>
       <% (0..6).each do |number| %>
 
-        <% if @reservations[0..(count-1)].find{ |v| v == @next_lesson + number.day + 75.minutes * 7 } %>            
-            <th class="danger"><p>Votre cours</p><%= link_to 'Annuler', reservation_path(@reservation), method: :delete, data: { confirm: "Etes-vous sûr?" }, class: 'btn btn-danger btn-xs' %></th>
+        <% if @reservations_dates.find{ |v| v == @next_lesson + number.day + 75.minutes * 7 } %>            
+            <th class="danger"><p>pris</p></th>
           <% else %>
             <th class="danger"><p>-</p></th>
           <% end %>

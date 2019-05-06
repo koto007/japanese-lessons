@@ -42,7 +42,8 @@ class ReservationsController < ApplicationController
         @this_monday += 14.days
         @next_lesson = Time.mktime(@this_monday.year, @this_monday.month, @this_monday.day, 10, 00).in_time_zone("Paris")
       end
-    @reservations = Reservation.all.order('reserved_at ASC')
+      @reservations = Reservation.all.order('reserved_at ASC')
+    @reservations_dates = Reservation.all.order('reserved_at ASC').map(&:reserved_at)
   end
   
   def new
