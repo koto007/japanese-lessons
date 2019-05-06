@@ -24,7 +24,7 @@
               <li><%= link_to 'Contact', inquiry_path %></li>
 
             <% if logged_in? %>              
-              <li><%= link_to 'Déconnextion', logout_path, method: :delete %></li>
+              <li><%= link_to 'Déconnexion', logout_path, method: :delete %></li>
             <% else %>  
               <li><%= link_to "S'inscrire", signup_path %></li>
               <li><%= link_to 'Se connecter', login_path %></li>
