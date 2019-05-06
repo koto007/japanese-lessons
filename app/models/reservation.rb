@@ -29,7 +29,7 @@ class Reservation < ApplicationRecord
 
     def week_quota
       unless self.user.admin == true
-        if self.user.reservations.count >= 2 && self.user.reservations.where(:reserved_at => self.reserved_at.beginning_of_day..self.reserved_at.end_of_day + 7.days).exists?
+        if self.user.reservations.count >= 2 && self.user.reservations.where(:reserved_at => self.reserved_at.beginning_of_week..self.reserved_at.end_of_week).count > 1
           errors.add(:base, "Vous pouvez réserver deux cours par semaine, vous avez déjà réservé deux cours à cette semaine.")
         end
       end         
